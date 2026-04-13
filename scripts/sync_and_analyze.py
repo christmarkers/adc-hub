@@ -60,26 +60,49 @@ def download_file(service, file_id, mime_type):
     return buf.getvalue()
 
 # ── Claude AI 분석 ────────────────────────────────────────────────────────────
-ANALYSIS_PROMPT = """이 ADC(Antibody-Drug Conjugate) 관련 학회 포스터를 분석해서 아래 JSON 형식으로만 응답해줘.
+ANALYSIS_PROMPT = """이 학회 포스터를 분석해서 아래 JSON 형식으로만 응답해줘.
 마크다운 코드블록 없이 순수 JSON만 출력해.
 
 {
   "title": "포스터 제목 (약물명 + 연구명 포함)",
   "company": "개발사명",
-  "target": "타겟 항원 (예: HER2, TROP2, HER3)",
-  "indication": "적응증 (예: HER2+ Metastatic Breast Cancer)",
-  "payload": "Payload 물질명",
-  "linker": "Linker 종류",
-  "dar": "DAR 수치",
-  "phase": "임상 단계 (예: Phase 1, Phase 2, Phase 3, Approved, Preclinical)",
-  "orr": "ORR 수치 (없으면 N/A)",
-  "pfs": "PFS 수치 (없으면 N/A)",
-  "os": "OS 수치 (없으면 N/A)",
-  "dlt": "주요 DLT 또는 AE (없으면 N/A)",
-  "highlight": "150자 이내 핵심 인사이트 요약 (한국어로)"
+  "modality": "약물 종류 (ADC / biADC / ISAC / PDC / XDC / 기타 중 하나)",
+  "target": "타겟 항원 (예: HER2, TROP2, HER3, CLDN18.2)",
+  "indication": "적응증 및 환자군 (예: 2L+ HER2+ Metastatic Breast Cancer, prior trastuzumab)",
+  "payload": "Payload 물질명 (없으면 N/A)",
+  "linker": "Linker 종류 (없으면 N/A)",
+  "dar": "DAR 수치 (없으면 N/A)",
+  "phase": "임상 단계 (예: Phase 1, Phase 1/2, Phase 2, Phase 3, Approved, Preclinical)",
+  "orr": "전체 ORR 수치 (없으면 N/A)",
+  "pfs": "전체 PFS 수치 (없으면 N/A)",
+  "os": "전체 OS 수치 (없으면 N/A)",
+  "dlt": "주요 DLT 또는 AE 요약 (없으면 N/A)",
+  "highlight": "150자 이내 핵심 인사이트 요약 (한국어로)",
+  "dose_efficacy": [
+    {
+      "dose": "용량 (예: 6.4 mg/kg Q3W)",
+      "n": "환자 수",
+      "orr": "ORR",
+      "dcr": "DCR (없으면 N/A)",
+      "pfs": "mPFS (없으면 N/A)",
+      "note": "비고 (예: RP2D, DLT 발생 등)"
+    }
+  ],
+  "efficacy_detail": "용량별 외 추가 효능 정보 (예: 바이오마커별 반응, 하위군 분석 등, 없으면 빈 문자열)",
+  "safety_table": [
+    {
+      "ae": "부작용명",
+      "any": "Any Grade 발생률",
+      "g3": "Grade 3+ 발생률"
+    }
+  ],
+  "safety_detail": "추가 safety 정보 (예: DLT 상세, 치료 중단율, ILD 발생 등, 없으면 빈 문자열)"
 }
 
-포스터에서 명확하지 않은 항목은 반드시 "N/A"로 표기해줘."""
+중요:
+- dose_efficacy: Dose escalation study인 경우 용량별 효능을 배열로 정리. 단일 용량이면 1개 항목만. 데이터 없으면 빈 배열 [].
+- safety_table: 포스터에 언급된 주요 부작용(AE) 5~10개를 발생률과 함께 정리. 데이터 없으면 빈 배열 [].
+- 포스터에서 명확하지 않은 항목은 "N/A"로 표기."""
 
 def analyze_poster(client, file_bytes, mime_type, conf_name, file_name):
     """Claude API로 포스터 분석"""
