@@ -799,7 +799,7 @@ let pptOpt = 1;
 function getFiltered() {
   return POSTERS.filter(p => {
     if (activeConf !== 'all' && p.conf !== activeConf) return false;
-    if (activeMods.size > 0 && !activeMods.has(p.modality || 'ADC')) return false;
+    if (activeMods.size > 0 && p.modality && !activeMods.has(p.modality)) return false;
     if (!activeTargets.has('ALL') && activeTargets.size > 0 && !activeTargets.has(p.target)) return false;
     if (activePhases.size > 0 && !activePhases.has(p.phase) && !activePhases.has(p.phaseKey)) return false;
     if (searchQ) {
@@ -865,7 +865,7 @@ function selectPoster(id) {
 
 // ── FILTERS ──
 function renderModalityChips() {
-  const mods = [...new Set(POSTERS.map(p => p.modality || 'ADC').filter(Boolean))].sort();
+  const mods = [...new Set(POSTERS.map(p => p.modality).filter(Boolean))].sort();
   document.getElementById('modalityChips').innerHTML =
     mods.map(mod =>
       `<span class="chip${activeMods.has(mod) ? ' active' : ''}" onclick="toggleMod(this,'${mod}')">${mod}</span>`
@@ -907,8 +907,12 @@ function filterConf(conf, el) {
   renderList();
 }
 function toggleMod(el, mod) {
-  el.classList.toggle('active');
-  if (el.classList.contains('active')) activeMods.add(mod); else activeMods.delete(mod);
+  if (activeMods.has(mod)) {
+    activeMods.delete(mod);
+  } else {
+    activeMods.add(mod);
+  }
+  renderModalityChips();
   renderList();
 }
 
@@ -925,7 +929,9 @@ function toggleTarget(el, t) {
   }
   renderList();
 }
-
+  }
+  renderList();
+}
 function togglePhase(el, ph) {
   el.classList.toggle('active');
   if (el.classList.contains('active')) activePhases.add(ph); else activePhases.delete(ph);
