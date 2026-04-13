@@ -3,6 +3,94 @@
     {
       "title": "Efficacy and Safety of JSKN003, a Biparatopic anti-HER2 Antibody Drug Conjugate (ADC), in patients with HER2-positive Metastatic Colorectal Cancer (mCRC)",
       "company": "Alphamab Oncology Ltd",
+      "modality": "biADC",
+      "target": "HER2",
+      "indication": "HER2-positive Metastatic Colorectal Cancer, heavily pretreated (42.4% ≥3L prior therapy)",
+      "payload": "Topoisomerase I inhibitor",
+      "linker": "Tetrapeptide linker",
+      "dar": "~4",
+      "phase": "Phase 1/2",
+      "orr": "68.8% (22/32, 95% CI: 50.0-83.9%)",
+      "pfs": "11.04 months (95% CI: 6.9-14.0)",
+      "os": "N/A",
+      "dlt": "Grade ≥3 TRAEs: 21.2%, ILD: 12.1% (grade 1-2), No treatment discontinuation or death",
+      "highlight": "JSKN003은 중증 전치료를 받은 HER2 양성 전이성 대장암에서 68.8%의 높은 반응률과 11.04개월의 중앙 PFS를 달성하였으며, 관리 가능한 안전성 프로파일을 보여줌",
+      "dose_efficacy": [
+        {
+          "dose": "6.3 mg/kg Q3W",
+          "n": "32",
+          "orr": "68.8%",
+          "dcr": "96.9%",
+          "pfs": "11.04 months",
+          "note": "주요 분석군"
+        },
+        {
+          "dose": "8.4 mg/kg Q3W",
+          "n": "1",
+          "orr": "N/A",
+          "dcr": "N/A",
+          "pfs": "N/A",
+          "note": "단일 환자"
+        }
+      ],
+      "efficacy_detail": "BRAF V600E wild-type 환자군(n=31)에서 ORR 71.0%, DCR 100%, mDoR 9.89개월. 9개월 PFS rate 66.6%. 간 전이 환자 54.5%, 뇌 전이 환자 9.1%. 이전 HER2 치료 경험 33.3%.",
+      "safety_table": [
+        {
+          "ae": "Diarrhea",
+          "any": "~60%",
+          "g3": "N/A"
+        },
+        {
+          "ae": "Nausea",
+          "any": "~40%",
+          "g3": "N/A"
+        },
+        {
+          "ae": "Interstitial Lung Disease",
+          "any": "12.1%",
+          "g3": "0%"
+        },
+        {
+          "ae": "Any Grade TRAEs",
+          "any": "100%",
+          "g3": "21.2%"
+        }
+      ],
+      "safety_detail": "중앙 추적관찰 기간 9.26개월. 치료 관련 중단 0명, 치료 관련 사망 0명. ILD 4명(12.1%) 발생하였으나 모두 grade 1-2로 경증이었음. 대부분의 부작용이 grade 1-2의 경증이었으며 설사와 오심이 가장 흔한 부작용이었음.",
+      "conf": "ESMO 2025",
+      "file_name": "4076.pdf",
+      "analyzed_at": "2026-04-13T08:50:56.201022+00:00",
+      "drive_file_id": "1C-R2om8_BeKeg8kY3tSJK5xnmdaFeQpa",
+      "id": "1C-R2om8_BeKeg8kY3tSJK5xnmdaFeQpa"
+    },
+    {
+      "title": "BDC-4182, a claudin18.2-targeting next-generation immune-stimulating antibody conjugate (ISAC) - Phase 1/2 study in patients with advanced gastric and gastroesophageal cancer",
+      "company": "Bolt Biotherapeutics",
+      "modality": "ISAC",
+      "target": "CLDN18.2",
+      "indication": "2L+ metastatic gastric or gastroesophageal cancer",
+      "payload": "N/A",
+      "linker": "N/A",
+      "dar": "N/A",
+      "phase": "Phase 1/2",
+      "orr": "N/A",
+      "pfs": "N/A",
+      "os": "N/A",
+      "dlt": "N/A",
+      "highlight": "First-in-class CLDN18.2 ISAC으로 낮은 발현량(IHC 1+)에서도 완전 종양 퇴행을 유도하고, 기존 ADC보다 우수한 항종양 효과를 보이는 차세대 면역자극 항체접합체의 임상시험",
+      "dose_efficacy": [],
+      "efficacy_detail": "전임상에서 CLDN18.2 낮은 발현량(IHC 1+) 종양에서 완전 퇴행 유도, T세포 의존적 면역 기억 형성으로 항원 소실 변이체 성장 억제, 동계 모델에서 기존 세포독성 ADC보다 우수한 효능 확인",
+      "safety_table": [],
+      "safety_detail": "용량 증량 단계의 초기 단계로 안전성 데이터 미발표. 주요 제외기준으로 CNS 전이, 심폐간 질환, 활성 감염, 염증성 안질환 등이 설정됨",
+      "conf": "ESMO 2025",
+      "file_name": "4390.pdf",
+      "analyzed_at": "2026-04-13T08:51:09.512466+00:00",
+      "drive_file_id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A",
+      "id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A"
+    },
+    {
+      "title": "Efficacy and Safety of JSKN003, a Biparatopic anti-HER2 Antibody Drug Conjugate (ADC), in patients with HER2-positive Metastatic Colorectal Cancer (mCRC)",
+      "company": "Alphamab Oncology Ltd",
       "target": "HER2",
       "indication": "HER2-positive Metastatic Colorectal Cancer",
       "payload": "topoisomerase I inhibitor (TOP1i)",
@@ -82,6 +170,6 @@
       "id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A"
     }
   ],
-  "updated_at": "2026-04-13T08:46:59.584636+00:00",
-  "total": 4
+  "updated_at": "2026-04-13T08:51:09.513020+00:00",
+  "total": 6
 }
