@@ -1,0 +1,39 @@
+name: Sync Google Drive & Analyze Posters
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # 매 1시간마다 자동 실행
+  workflow_dispatch:        # 수동 실행 버튼도 제공
+
+jobs:
+  sync-and-analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install google-api-python-client google-auth anthropic pymupdf pillow
+
+      - name: Sync Drive & Analyze
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
+        run: python scripts/sync_and_analyze.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data.json
+          git diff --staged --quiet || git commit -m "Auto-update poster data $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
