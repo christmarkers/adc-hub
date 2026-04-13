@@ -1,6 +1,26 @@
 {
   "posters": [
     {
+      "title": "Efficacy and Safety of JSKN003, a Biparatopic anti-HER2 Antibody Drug Conjugate (ADC), in patients with HER2-positive Metastatic Colorectal Cancer (mCRC)",
+      "company": "Alphamab Oncology Ltd",
+      "target": "HER2",
+      "indication": "HER2-positive Metastatic Colorectal Cancer",
+      "payload": "topoisomerase I inhibitor (TOP1i)",
+      "linker": "tetrapeptide linker",
+      "dar": "~4",
+      "phase": "Phase 1/2",
+      "orr": "71.0% (95% CI: 52.0-85.8%)",
+      "pfs": "11.04 months (95% CI: 6.9-14.0)",
+      "os": "N/A",
+      "dlt": "설사, 구역질 (대부분 Grade 1-2), 간질성 폐질환 4례 (12.1%, Grade 1-2)",
+      "highlight": "JSKN003는 이중특이적 HER2 ADC로서 HER2 양성 전이성 대장암에서 71% ORR과 11개월 PFS를 보였으며, 안전성 프로필이 양호하고 치료 중단을 유발하는 독성이 없었음.",
+      "conf": "ESMO 2025",
+      "file_name": "4076.pdf",
+      "analyzed_at": "2026-04-13T07:28:16.635015+00:00",
+      "drive_file_id": "1C-R2om8_BeKeg8kY3tSJK5xnmdaFeQpa",
+      "id": "1C-R2om8_BeKeg8kY3tSJK5xnmdaFeQpa"
+    },
+    {
       "title": "Phase 1/2 study of BDC-4182, a claudin18.2-targeting next-generation immune-stimulating antibody conjugate (ISAC), in patients with advanced gastric and gastroesophageal cancer",
       "company": "Bolt Biotherapeutics",
       "target": "CLDN18.2",
@@ -22,6 +42,6 @@
       "id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A"
     }
   ],
-  "updated_at": "2026-04-13T07:12:15.471028+00:00",
-  "total": 1
+  "updated_at": "2026-04-13T07:28:16.635234+00:00",
+  "total": 2
 }
