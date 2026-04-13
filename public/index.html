@@ -19,8 +19,8 @@
   --accent-dim: rgba(79,255,176,0.12);
   --accent-dim2: rgba(61,224,255,0.1);
   --text: #e8eaf2;
-  --text2: #8a8fa8;
-  --text3: #555970;
+  --text2: #b0b5cc;
+  --text3: #7a80a0;
   --danger: #ff6b6b;
   --warn: #ffb547;
   --info: #3de0ff;
@@ -31,7 +31,7 @@
   --radius-lg: 16px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 14px; }
+html { font-size: 15px; }
 body {
   font-family: var(--sans);
   background: var(--bg);
@@ -153,13 +153,13 @@ body {
 }
 .poster-card:hover { background: var(--surface2); }
 .poster-card.active { background: var(--accent-dim); border-color: rgba(79,255,176,.25); }
-.pc-title { font-size: 12px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 4px; }
+.pc-title { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 4px; }
 .poster-card.active .pc-title { color: var(--accent); }
-.pc-meta { font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+.pc-meta { font-size: 12px; color: var(--text2); margin-bottom: 6px; }
 .pc-badges { display: flex; gap: 4px; flex-wrap: wrap; }
 .pc-badge {
-  font-size: 10px; padding: 2px 7px; border-radius: 6px;
-  background: var(--surface3); color: var(--text2);
+  font-size: 11px; padding: 2px 8px; border-radius: 6px;
+  background: var(--surface3); color: var(--text);
   font-family: var(--mono);
 }
 
@@ -189,31 +189,31 @@ body {
   border-radius: var(--radius); padding: 12px 14px;
 }
 .s-label {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .08em;
-  color: var(--text3); text-transform: uppercase; margin-bottom: 5px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+  color: var(--text2); text-transform: uppercase; margin-bottom: 5px;
 }
-.s-value { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.4; }
-.s-sub { font-size: 11px; color: var(--text2); margin-top: 3px; }
+.s-value { font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.4; }
+.s-sub { font-size: 12px; color: var(--text2); margin-top: 3px; }
 
 .highlight-box {
   background: rgba(79,255,176,.06); border: 1px solid rgba(79,255,176,.2);
   border-left: 3px solid var(--accent);
-  border-radius: var(--radius); padding: 12px 14px;
-  font-size: 12px; color: var(--text); line-height: 1.6;
+  border-radius: var(--radius); padding: 14px 16px;
+  font-size: 14px; color: var(--text); line-height: 1.7;
   margin-bottom: 20px;
 }
 .section-title {
-  font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
-  color: var(--text3); text-transform: uppercase;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
+  color: var(--text2); text-transform: uppercase;
   margin: 18px 0 10px; padding-bottom: 6px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border2);
 }
 .result-row {
   display: flex; gap: 10px; padding: 5px 0;
   border-bottom: 1px solid var(--border); align-items: flex-start;
 }
-.result-key { font-size: 11px; color: var(--text3); min-width: 100px; padding-top: 1px; font-family: var(--mono); }
-.result-val { font-size: 12px; color: var(--text); flex: 1; }
+.result-key { font-size: 12px; color: var(--text2); min-width: 120px; padding-top: 1px; font-family: var(--mono); }
+.result-val { font-size: 13px; color: var(--text); flex: 1; }
 .result-val.hi { color: var(--accent); font-weight: 500; }
 
 .source-link {
@@ -417,7 +417,7 @@ body {
   <div class="logo">ADC<span>/</span>HUB</div>
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="switchPage('library')">포스터 라이브러리</button>
-    <button class="nav-tab" onclick="switchPage('pipeline')">경쟁 파이프라인</button>
+    <button class="nav-tab" onclick="switchPage('schedule')">학회 일정</button>
     
   </div>
   <div class="nav-right">
@@ -466,7 +466,8 @@ body {
     <div class="detail-tabs">
       <div class="dtab active" onclick="switchTab('summary',this)">AI 요약</div>
       <div class="dtab" onclick="switchTab('viewer',this)">원본 보기</div>
-      <div class="dtab" onclick="switchTab('compare',this)">비교</div>
+      <div class="dtab" onclick="switchTab('similar',this)">동일 타겟 비교</div>
+      <div class="dtab" onclick="switchTab('compare',this)">직접 비교</div>
     </div>
 
     <!-- SUMMARY TAB -->
@@ -475,8 +476,8 @@ body {
     </div>
 
     <!-- VIEWER TAB -->
-    <div class="detail-body fade-in" id="tabViewer" style="display:none">
-      <div class="viewer-mock">
+    <div class="detail-body fade-in" id="tabViewer" style="display:none;padding:8px">
+      <div class="viewer-mock" style="display:flex;flex-direction:column;height:calc(100vh - 160px)">
         <div class="viewer-toolbar">
           <button class="vtool-btn">◀</button>
           <button class="vtool-btn">▶</button>
@@ -485,63 +486,42 @@ body {
           <button class="vtool-btn">전체화면</button>
           <span style="font-size:11px;color:var(--text3);margin-left:auto">1 / 1 page</span>
         </div>
-        <div id="viewerContent" style="height:480px;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:13px">
+        <div id="viewerContent" style="height:calc(100vh - 200px);min-height:600px;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:13px">
           포스터를 선택하면 원본이 표시됩니다
         </div>
+      </div>
+    </div>
+
+    <!-- SIMILAR TAB -->
+    <div class="detail-body fade-in" id="tabSimilar" style="display:none">
+      <div id="similarContent">
+        <div class="empty-state">포스터를 선택하면 동일 타겟 비교가 표시됩니다</div>
       </div>
     </div>
 
     <!-- COMPARE TAB -->
     <div class="detail-body fade-in" id="tabCompare" style="display:none">
       <div id="compareContent">
-        <div class="empty-state">비교할 포스터를 목록에서 한 개 더 선택하세요</div>
+        <div class="empty-state">비교할 포스터를 목록에서 한 개 더 선택 후 "직접 비교에 추가" 를 눌러주세요</div>
       </div>
     </div>
 
     <div class="action-bar">
       <button class="btn btn-primary" onclick="openPPTModal()">PPT 다운로드</button>
-      <button class="btn" onclick="toggleCompare()">비교에 추가</button>
+      <button class="btn" onclick="toggleCompare()">직접 비교에 추가</button>
       <span class="ai-tag">Claude AI 요약</span>
     </div>
   </div>
 </div>
 
-<!-- MAIN: PIPELINE PAGE -->
-<div class="page" id="page-pipeline">
+<!-- MAIN: SCHEDULE PAGE -->
+<div class="page" id="page-schedule">
   <div class="page-body">
     <div class="page-header">
-      <div class="page-title">HER2 ADC 경쟁 파이프라인 분석</div>
-      <div class="page-sub">글로벌 HER2 ADC 개발 현황 · 최신 임상 데이터 기준 (2024–2025) · 각 항목 클릭 시 출처 확인</div>
+      <div class="page-title">2026 주요 글로벌 학회 일정</div>
+      <div class="page-sub">ADC 관련 주요 발표가 예정된 글로벌 종양학회 · 학회명 클릭 시 세부 일정 확인</div>
     </div>
-
-    <div class="section-title">파이프라인 맵 — 임상 단계별</div>
-    <div class="table-wrap" style="margin-bottom:32px">
-      <table class="pipe-table" id="pipelineTable">
-        <thead>
-          <tr>
-            <th>약물명</th>
-            <th>개발사</th>
-            <th>Payload</th>
-            <th>DAR</th>
-            <th>단계</th>
-            <th>ORR</th>
-            <th>적응증</th>
-            <th>진행도</th>
-          </tr>
-        </thead>
-        <tbody id="pipelineBody"></tbody>
-      </table>
-    </div>
-
-    <div class="section-title">ORR 비교 (최신 임상 보고 기준)</div>
-    <div class="orr-compare-grid" id="orrGrid"></div>
-
-    <div style="font-size:11px;color:var(--text3);margin-top:12px;padding:10px;border:1px solid var(--border);border-radius:8px">
-      * 임상 단계, 환자군, 치료선이 각기 다르므로 직접 비교 시 주의 필요. LCB84는 전임상 단계로 ORR 데이터 없음.
-    </div>
-
-    <div class="section-title" style="margin-top:28px">주요 출처 &amp; 레퍼런스</div>
-    <div id="refList"></div>
+    <div id="scheduleList"></div>
   </div>
 </div>
 
@@ -809,7 +789,7 @@ function renderList() {
   el.innerHTML = list.length === 0
     ? '<div class="empty-state" style="height:120px">조건에 맞는 포스터가 없습니다</div>'
     : list.map(p => `
-      <div class="poster-card${selected && p.id===selected.id?' active':''}" onclick="selectPoster(${p.id})">
+      <div class="poster-card${p.id===selected.id?' active':''}" onclick="selectPoster(${p.id})">
         <div class="pc-title">${p.title}</div>
         <div class="pc-meta">${p.company} · ${p.conf}</div>
         <div class="pc-badges">
@@ -840,39 +820,196 @@ function updateViewer(p) {
 
 function renderSummary(p) {
   updateViewer(p);
-  const srcHtml = p.sources.map(s =>
+  const srcHtml = (p.sources || []).map(s =>
     `<a class="source-link" href="${s.url}" target="_blank" rel="noopener">
       <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V7"/><path d="M8 1h3v3M11 1L6 6"/></svg>
       ${s.label}
     </a>`).join('');
 
-  document.getElementById('summaryContent').innerHTML = `
-    <div class="highlight-box">${p.highlight}</div>
-    <div class="summary-grid">
-      <div class="s-card"><div class="s-label">Target</div><div class="s-value">${p.target}</div><div class="s-sub">${p.indication}</div></div>
-      <div class="s-card"><div class="s-label">Modality / Phase</div><div class="s-value">${p.modality}</div><div class="s-sub">${p.phase}</div></div>
-      <div class="s-card"><div class="s-label">Payload</div><div class="s-value" style="font-size:12px">${p.payload}</div><div class="s-sub">Linker: ${p.linker}</div></div>
-      <div class="s-card"><div class="s-label">DAR</div><div class="s-value">${p.dar}</div><div class="s-sub">Drug-to-Antibody Ratio</div></div>
-    </div>
+  // 용량별 효능 테이블 (dose_efficacy 배열이 있는 경우)
+  let efficacyHtml = '';
+  if (p.dose_efficacy && p.dose_efficacy.length > 0) {
+    efficacyHtml = `
+    <div class="section-title">용량별 효능 결과</div>
+    <div style="overflow-x:auto;margin-bottom:8px">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border2)">
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">Dose</th>
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">N</th>
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">ORR</th>
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">DCR</th>
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">PFS</th>
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${p.dose_efficacy.map((d,i) => `
+          <tr style="border-bottom:1px solid var(--border);background:${i%2===0?'transparent':'rgba(255,255,255,.02)'}">
+            <td style="padding:7px 10px;font-family:var(--mono);color:var(--accent)">${d.dose||'—'}</td>
+            <td style="padding:7px 10px;color:var(--text)">${d.n||'—'}</td>
+            <td style="padding:7px 10px;color:var(--accent);font-weight:500">${d.orr||'—'}</td>
+            <td style="padding:7px 10px;color:var(--text)">${d.dcr||'—'}</td>
+            <td style="padding:7px 10px;color:var(--text)">${d.pfs||'—'}</td>
+            <td style="padding:7px 10px;color:var(--text2);font-size:12px">${d.note||'—'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+  } else {
+    efficacyHtml = `
     <div class="section-title">임상 효능 결과</div>
-    <div class="result-row"><span class="result-key">ORR</span><span class="result-val hi">${p.orr}</span></div>
-    <div class="result-row"><span class="result-key">PFS</span><span class="result-val">${p.pfs}</span></div>
-    <div class="result-row"><span class="result-key">OS</span><span class="result-val">${p.os}</span></div>
-    <div class="section-title">Safety</div>
-    <div class="result-row"><span class="result-key">주요 DLT / AE</span><span class="result-val">${p.dlt}</span></div>
+    <div style="margin-bottom:4px;font-size:12px;color:var(--text2)">${p.indication || ''}</div>
+    <div class="result-row"><span class="result-key">ORR</span><span class="result-val hi">${p.orr||'N/A'}</span></div>
+    <div class="result-row"><span class="result-key">PFS</span><span class="result-val">${p.pfs||'N/A'}</span></div>
+    <div class="result-row"><span class="result-key">OS</span><span class="result-val">${p.os||'N/A'}</span></div>
+    ${p.efficacy_detail ? `<div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-radius:var(--radius);font-size:13px;color:var(--text);line-height:1.6">${p.efficacy_detail}</div>` : ''}`;
+  }
+
+  // Safety 상세
+  let safetyHtml = `<div class="section-title">Safety</div>`;
+  if (p.safety_table && p.safety_table.length > 0) {
+    safetyHtml += `
+    <div style="overflow-x:auto;margin-bottom:10px">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border2)">
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">부작용 (AE)</th>
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">Any Grade</th>
+            <th style="text-align:left;padding:7px 10px;color:var(--text2);font-weight:500;font-size:11px;font-family:var(--mono)">Grade ≥3</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${p.safety_table.map((s,i) => `
+          <tr style="border-bottom:1px solid var(--border);background:${i%2===0?'transparent':'rgba(255,255,255,.02)'}">
+            <td style="padding:7px 10px;color:var(--text)">${s.ae||'—'}</td>
+            <td style="padding:7px 10px;color:var(--text)">${s.any||'—'}</td>
+            <td style="padding:7px 10px;color:${s.g3&&s.g3!=='0%'&&s.g3!=='N/A'?'var(--danger)':'var(--text)'}">${s.g3||'—'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+  } else {
+    safetyHtml += `<div class="result-row"><span class="result-key">주요 DLT / AE</span><span class="result-val">${p.dlt||'N/A'}</span></div>`;
+  }
+  if (p.safety_detail) {
+    safetyHtml += `<div style="margin-top:8px;padding:10px 12px;background:var(--surface2);border-radius:var(--radius);font-size:13px;color:var(--text);line-height:1.6">${p.safety_detail}</div>`;
+  }
+
+  document.getElementById('summaryContent').innerHTML = `
+    <div class="highlight-box">${p.highlight||''}</div>
+    <div class="summary-grid">
+      <div class="s-card"><div class="s-label">Target</div><div class="s-value">${p.target||'N/A'}</div><div class="s-sub">${p.indication||''}</div></div>
+      <div class="s-card"><div class="s-label">Modality / Phase</div><div class="s-value">${p.modality||'ADC'}</div><div class="s-sub">${p.phase||''}</div></div>
+      <div class="s-card"><div class="s-label">Payload</div><div class="s-value" style="font-size:13px">${p.payload||'N/A'}</div><div class="s-sub">Linker: ${p.linker||'N/A'}</div></div>
+      <div class="s-card"><div class="s-label">DAR</div><div class="s-value">${p.dar||'N/A'}</div><div class="s-sub">Drug-to-Antibody Ratio</div></div>
+    </div>
+    ${efficacyHtml}
+    ${safetyHtml}
     <div class="section-title">개발사</div>
-    <div class="result-row"><span class="result-key">회사</span><span class="result-val">${p.company}</span></div>
-    <div class="result-row"><span class="result-key">학회</span><span class="result-val">${p.conf}</span></div>
-    <div class="section-title">출처 / References</div>
-    <div class="sources-section">${srcHtml}</div>
+    <div class="result-row"><span class="result-key">회사</span><span class="result-val">${p.company||''}</span></div>
+    <div class="result-row"><span class="result-key">학회</span><span class="result-val">${p.conf||''}</span></div>
+    ${srcHtml ? `<div class="section-title">출처 / References</div><div class="sources-section">${srcHtml}</div>` : ''}
+  `;
+}
+
+function getTargetGroup(target) {
+  // 동일 타겟 그룹핑: 이중항체도 포함 (예: EGFR×HER3 → HER3로도 매칭)
+  if (!target) return [];
+  const t = target.toUpperCase();
+  const groups = {
+    'HER2': ['HER2'],
+    'HER3': ['HER3', 'EGFR×HER3', 'HER2×HER3'],
+    'TROP2': ['TROP2'],
+    'EGFR': ['EGFR', 'EGFR×HER3'],
+    'CLDN18.2': ['CLDN18.2', 'CLAUDIN18.2'],
+    'B7-H4': ['B7-H4'],
+    'CEACAM5': ['CEACAM5'],
+    'CDH6': ['CDH6'],
+  };
+  for (const [key, aliases] of Object.entries(groups)) {
+    if (aliases.some(a => t.includes(a) || a.includes(t))) return aliases;
+  }
+  return [t];
+}
+
+function isSameTarget(t1, t2) {
+  if (!t1 || !t2) return false;
+  const g1 = getTargetGroup(t1);
+  const g2 = getTargetGroup(t2);
+  const t1u = t1.toUpperCase(), t2u = t2.toUpperCase();
+  return g1.some(a => t2u.includes(a) || a.includes(t2u)) ||
+         g2.some(a => t1u.includes(a) || a.includes(t1u));
+}
+
+function renderSimilar() {
+  const el = document.getElementById('similarContent');
+  if (!selected) { el.innerHTML = '<div class="empty-state">포스터를 선택하면 동일 타겟 비교가 표시됩니다</div>'; return; }
+
+  const peers = POSTERS.filter(p => String(p.id) !== String(selected.id) && isSameTarget(p.target, selected.target));
+
+  if (peers.length === 0) {
+    el.innerHTML = `<div style="padding:20px 0;color:var(--text2);font-size:13px;text-align:center">
+      라이브러리에 동일 타겟(${selected.target}) 포스터가 없습니다.<br>
+      <span style="font-size:12px;color:var(--text3)">Drive에 포스터를 추가하면 자동으로 분석 후 이 탭에 표시됩니다.</span>
+    </div>`;
+    return;
+  }
+
+  const cols = [selected, ...peers];
+  const rows = [
+    { key: 'Target', fn: p => p.target || 'N/A' },
+    { key: 'Modality', fn: p => p.modality || 'N/A' },
+    { key: 'Phase', fn: p => p.phase || 'N/A' },
+    { key: 'Payload', fn: p => (p.payload || 'N/A') },
+    { key: 'Linker', fn: p => p.linker || 'N/A' },
+    { key: 'DAR', fn: p => p.dar || 'N/A' },
+    { key: '적응증 / Treatment line', fn: p => p.indication || 'N/A' },
+    { key: 'ORR', fn: p => p.orr || 'N/A', hi: true },
+    { key: 'PFS', fn: p => p.pfs || 'N/A' },
+    { key: 'OS', fn: p => p.os || 'N/A' },
+    { key: 'DLT / AE', fn: p => p.dlt || 'N/A' },
+    { key: '학회', fn: p => p.conf || '' },
+    { key: '개발사', fn: p => p.company || '' },
+  ];
+
+  el.innerHTML = `
+    <div style="margin-bottom:12px;padding:10px 14px;background:var(--accent-dim);border:1px solid rgba(79,255,176,.2);border-radius:var(--radius);font-size:13px;color:var(--accent)">
+      Target: <strong>${selected.target}</strong> 동일 타겟 포스터 ${peers.length}개와 비교 중
+    </div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:${cols.length * 200}px">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border2)">
+            <th style="text-align:left;padding:10px 12px;color:var(--text2);font-family:var(--mono);font-size:11px;min-width:140px;background:var(--surface2)">항목</th>
+            ${cols.map((p, i) => `
+            <th style="text-align:left;padding:10px 12px;min-width:200px;background:${i===0?'rgba(79,255,176,.06)':'var(--surface2)'};border-left:1px solid var(--border)">
+              <div style="font-size:12px;font-weight:600;color:${i===0?'var(--accent)':'var(--text)'};margin-bottom:3px;line-height:1.3">${p.title}</div>
+              <div style="font-size:11px;color:var(--text2)">${p.company} · ${p.conf}</div>
+            </th>`).join('')}
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map((row, ri) => `
+          <tr style="border-bottom:1px solid var(--border);background:${ri%2===0?'transparent':'rgba(255,255,255,.015)'}">
+            <td style="padding:9px 12px;color:var(--text2);font-family:var(--mono);font-size:11px;background:var(--surface2);white-space:nowrap">${row.key}</td>
+            ${cols.map((p, i) => {
+              const val = row.fn(p);
+              return `<td style="padding:9px 12px;color:${row.hi && val!=='N/A'?'var(--accent)':i===0?'var(--text)':'var(--text2)'};font-weight:${row.hi&&val!=='N/A'?'600':'400'};border-left:1px solid var(--border);background:${i===0?'rgba(79,255,176,.03)':'transparent'}">${val}</td>`;
+            }).join('')}
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
   `;
 }
 
 function selectPoster(id) {
-  selected = POSTERS.find(p => p.id === id);
+  selected = POSTERS.find(p => String(p.id) === String(id));
+  if (!selected) return;
   renderList();
   renderSummary(selected);
-  renderCompare();
+  renderSimilar();
 }
 
 // ── FILTERS ──
@@ -954,7 +1091,9 @@ function switchTab(tab, el) {
   el.classList.add('active');
   document.getElementById('tabSummary').style.display = tab === 'summary' ? 'block' : 'none';
   document.getElementById('tabViewer').style.display = tab === 'viewer' ? 'block' : 'none';
+  document.getElementById('tabSimilar').style.display = tab === 'similar' ? 'block' : 'none';
   document.getElementById('tabCompare').style.display = tab === 'compare' ? 'block' : 'none';
+  if (tab === 'similar') renderSimilar();
 }
 
 // ── COMPARE ──
@@ -1089,11 +1228,129 @@ function renderRefs() {
 }
 
 // ── PAGE SWITCH ──
+const CONFERENCES_2026 = [
+  {
+    name: 'AACR Annual Meeting 2026',
+    short: 'AACR 2026',
+    date: '2026년 4월 25일 – 30일',
+    location: '시카고, IL, USA',
+    url: 'https://www.aacr.org/meeting/aacr-annual-meeting-2026/',
+    color: '#4fffb0',
+    sessions: [
+      { time: '4/25 (토)', title: 'Plenary Session 1 — Innovations in Cancer Therapeutics' },
+      { time: '4/26 (일)', title: 'ADC & Conjugate Therapies Symposium' },
+      { time: '4/27 (월)', title: 'Poster Session A — Antibody-Drug Conjugates' },
+      { time: '4/28 (화)', title: 'Clinical Trials Plenary' },
+      { time: '4/29 (수)', title: 'Poster Session B — Targeted Delivery' },
+      { time: '4/30 (목)', title: 'Closing Plenary — Future of Cancer Medicine' },
+    ]
+  },
+  {
+    name: 'ASCO Annual Meeting 2026',
+    short: 'ASCO 2026',
+    date: '2026년 5월 29일 – 6월 2일',
+    location: '시카고, IL, USA',
+    url: 'https://www.asco.org/meetings-education/asco-meetings/2026-asco-annual-meeting',
+    color: '#3de0ff',
+    sessions: [
+      { time: '5/29 (금)', title: 'Breast Cancer — HER2+ & HER2-low Oral Abstracts' },
+      { time: '5/30 (토)', title: 'ADC Spotlight Session' },
+      { time: '5/31 (일)', title: 'Gastrointestinal Cancers Oral Abstracts' },
+      { time: '6/1 (월)', title: 'Lung Cancer — NSCLC Targeted Therapy Session' },
+      { time: '6/2 (화)', title: 'Poster Discussion — Novel Conjugates & Payloads' },
+    ]
+  },
+  {
+    name: 'WCLC 2026',
+    short: 'WCLC 2026',
+    date: '2026년 9월 7일 – 10일',
+    location: '싱가포르',
+    url: 'https://wclc2026.iaslc.org/',
+    color: '#a78bfa',
+    sessions: [
+      { time: '9/7 (월)', title: 'Opening Plenary — Advances in Lung Cancer Treatment' },
+      { time: '9/8 (화)', title: 'HER2/HER3-Targeted ADCs in NSCLC' },
+      { time: '9/9 (수)', title: 'TROP2 ADC Clinical Data Session' },
+      { time: '9/10 (목)', title: 'Poster Session — Novel Mechanisms in Thoracic Oncology' },
+    ]
+  },
+  {
+    name: 'ESMO Congress 2026',
+    short: 'ESMO 2026',
+    date: '2026년 9월 18일 – 22일',
+    location: '바르셀로나, 스페인',
+    url: 'https://www.esmo.org/meeting-calendar/esmo-congress-2026',
+    color: '#ffb547',
+    sessions: [
+      { time: '9/18 (금)', title: 'Presidential Symposium 1 — Breast Cancer' },
+      { time: '9/19 (토)', title: 'ADC in Solid Tumors — Proffered Paper Session' },
+      { time: '9/20 (일)', title: 'Gastrointestinal Tumors — HER2/CLDN18.2 ADC Data' },
+      { time: '9/21 (월)', title: 'Poster Session — Antibody-Drug Conjugates' },
+      { time: '9/22 (화)', title: 'Closing Keynote — Next-Gen Payload & Linker Technologies' },
+    ]
+  },
+  {
+    name: 'ASH Annual Meeting 2026',
+    short: 'ASH 2026',
+    date: '2026년 12월 5일 – 8일',
+    location: '올랜도, FL, USA',
+    url: 'https://www.hematology.org/meetings/annual-meeting',
+    color: '#f472b6',
+    sessions: [
+      { time: '12/5 (토)', title: 'Plenary Session — Hematologic Malignancies' },
+      { time: '12/6 (일)', title: 'ADC in Hematology — CD33, CD79b, BCMA Targets' },
+      { time: '12/7 (월)', title: 'Myeloma & Lymphoma ADC Data Session' },
+      { time: '12/8 (화)', title: 'Closing Scientific Session' },
+    ]
+  },
+];
+
+let openConf = null;
+
+function renderSchedule() {
+  const today = new Date();
+  document.getElementById('scheduleList').innerHTML = CONFERENCES_2026.map((c, i) => {
+    const isOpen = openConf === i;
+    return `
+    <div style="margin-bottom:12px;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .2s">
+      <div onclick="toggleConf(${i})" style="display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;background:var(--surface);transition:background .15s"
+        onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='var(--surface)'">
+        <div style="width:4px;height:48px;background:${c.color};border-radius:2px;flex-shrink:0"></div>
+        <div style="flex:1">
+          <div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px">${c.name}</div>
+          <div style="font-size:13px;color:var(--text2)">${c.date} &nbsp;·&nbsp; ${c.location}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <a href="${c.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+            style="font-size:12px;padding:5px 12px;border:1px solid var(--border2);border-radius:6px;color:var(--text2);text-decoration:none;background:var(--surface2)">공식 사이트</a>
+          <span style="color:var(--text3);font-size:16px;transform:rotate(${isOpen?'90':'0'}deg);transition:transform .2s">›</span>
+        </div>
+      </div>
+      ${isOpen ? `
+      <div style="background:var(--surface2);border-top:1px solid var(--border);padding:16px 20px">
+        <div style="font-size:11px;font-family:var(--mono);color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">주요 세부 일정 (예정)</div>
+        ${c.sessions.map(s => `
+        <div style="display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--border);align-items:flex-start">
+          <span style="font-family:var(--mono);font-size:12px;color:${c.color};min-width:100px;flex-shrink:0">${s.time}</span>
+          <span style="font-size:13px;color:var(--text)">${s.title}</span>
+        </div>`).join('')}
+        <div style="margin-top:12px;font-size:12px;color:var(--text3)">* 세부 일정은 공식 발표 전으로 변경될 수 있습니다</div>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function toggleConf(i) {
+  openConf = openConf === i ? null : i;
+  renderSchedule();
+}
+
 function switchPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   event.target.classList.add('active');
+  if (page === 'schedule') renderSchedule();
 }
 
 // ── PPT MODAL ──
