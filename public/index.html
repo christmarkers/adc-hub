@@ -788,7 +788,7 @@ const REFS = [
 let selected = null;
 let compareWith = null;
 let activeConf = 'all';
-let activeMods = new Set(['ADC']);
+let activeMods = new Set();
 let activeTargets = new Set(['ALL']);
 let activePhases = new Set();
 let searchQ = '';
@@ -799,7 +799,7 @@ let pptOpt = 1;
 function getFiltered() {
   return POSTERS.filter(p => {
     if (activeConf !== 'all' && p.conf !== activeConf) return false;
-    if (activeMods.size > 0 && !activeMods.has(p.modality)) return false;
+    if (activeMods.size > 0 && !activeMods.has(p.modality || 'ADC')) return false;
     if (!activeTargets.has('ALL') && activeTargets.size > 0 && !activeTargets.has(p.target)) return false;
     if (activePhases.size > 0 && !activePhases.has(p.phase) && !activePhases.has(p.phaseKey)) return false;
     if (searchQ) {
