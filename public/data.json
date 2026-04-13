@@ -15,90 +15,13 @@
       "dlt": "N/A",
       "highlight": "BDC-4182는 첫 번째 CLDN18.2 타겟 ISAC로, 기존 세포독성 ADC와 달리 면역 활성화 기전을 통해 낮은 발현량(IHC 1+)에서도 완전 종양 퇴행을 유도하며, 전신 면역 기억을 형성해 항원 소실 변이체까지 제어 가능",
       "conf": "ESMO 2025",
+      "modality": "ISAC",
       "file_name": "4390.pdf",
       "analyzed_at": "2026-04-13T07:12:15.470881+00:00",
       "drive_file_id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A",
       "id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A"
-    },
-    {
-      "title": "Phase 1/2 study of BDC-4182, a claudin18.2-targeting next-generation immune-stimulating antibody conjugate (ISAC), in patients with advanced gastric and gastroesophageal cancer",
-      "company": "Bolt Biotherapeutics",
-      "target": "CLDN18.2",
-      "indication": "2L+ metastatic gastric or gastroesophageal cancer",
-      "payload": "N/A",
-      "linker": "N/A",
-      "dar": "N/A",
-      "phase": "Phase 1/2",
-      "orr": "N/A",
-      "pfs": "N/A",
-      "os": "N/A",
-      "dlt": "N/A",
-      "highlight": "기존 세포독성 ADC와 달리 면역 자극 기전을 이용하는 ISAC로, 낮은 CLDN18.2 발현(IHC 1+)에서도 완전관해를 달성하고 T세포 의존적 면역 기억을 유도하여 기존 ADC 대비 우수한 효능을 보임",
-      "conf": "ESMO 2025",
-      "file_name": "4390.pdf",
-      "analyzed_at": "2026-04-13T06:47:19.520269+00:00",
-      "drive_file_id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A",
-      "id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A"
-    },
-    {
-      "id": "sample_001",
-      "title": "T-DXd (Enhertu) DESTINY-Breast09 Phase 3 업데이트",
-      "company": "Daiichi Sankyo / AstraZeneca",
-      "conf": "ASCO 2024",
-      "modality": "ADC",
-      "target": "HER2",
-      "indication": "HER2+ Metastatic BC (1L)",
-      "payload": "DXd (Topoisomerase I inhibitor)",
-      "linker": "Cleavable tetrapeptide",
-      "dar": "~8",
-      "phase": "Approved",
-      "orr": "79%",
-      "pfs": "40.7mo",
-      "os": "N/R",
-      "dlt": "ILD 12.4% (Grade≥3: 2.6%)",
-      "highlight": "DESTINY-Breast09: 1L HER2+ 전이성 유방암에서 mPFS 40.7개월 달성 (대조군 26.9mo, HR=0.56). 2024년 ADC 매출 1위($3.7B). 6개 적응증 보유.",
-      "file_name": "ASCO2024_TDXd_DestinyBreast09.pdf",
-      "drive_file_id": "sample",
-      "analyzed_at": "2026-04-13T05:46:17.445279+00:00",
-      "sources": [
-        {
-          "label": "ASCO 2024 Abstract LBA1000",
-          "url": "https://meetings.asco.org/abstracts-presentations/239426"
-        }
-      ]
-    },
-    {
-      "id": "sample_002",
-      "title": "LCB84 전임상 데이터 (ConjuAll Linker)",
-      "company": "LigaChem Biosciences",
-      "conf": "AACR 2024",
-      "modality": "ADC",
-      "target": "HER2",
-      "indication": "HER2+ Solid Tumors (IND 준비)",
-      "payload": "Topoisomerase I inhibitor",
-      "linker": "ConjuAll (proprietary)",
-      "dar": "7.4–7.8",
-      "phase": "Preclinical",
-      "orr": "N/A",
-      "pfs": "N/A",
-      "os": "N/A",
-      "dlt": "N/A (in vivo 안전성 확인)",
-      "highlight": "리가켐 독자 ConjuAll linker 적용. 높은 DAR(7.4–7.8)에서도 우수한 PK 및 tumor penetration 전임상 확인. IND 신청 준비 단계.",
-      "file_name": "AACR2024_LCB84_Preclinical.pdf",
-      "drive_file_id": "sample",
-      "analyzed_at": "2026-04-13T05:46:17.445284+00:00",
-      "sources": [
-        {
-          "label": "AACR 2024 Abstract",
-          "url": "https://www.aacr.org/meeting/aacr-annual-meeting-2024/"
-        },
-        {
-          "label": "LigaChem Pipeline",
-          "url": "https://www.ligachem.com/pipeline"
-        }
-      ]
     }
   ],
   "updated_at": "2026-04-13T07:12:15.471028+00:00",
-  "total": 4
+  "total": 1
 }
