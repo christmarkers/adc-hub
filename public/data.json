@@ -5,6 +5,26 @@
       "company": "Bolt Biotherapeutics",
       "target": "CLDN18.2",
       "indication": "2L+ metastatic gastric or gastroesophageal cancer",
+      "payload": "N/A",
+      "linker": "N/A",
+      "dar": "N/A",
+      "phase": "Phase 1/2",
+      "orr": "N/A",
+      "pfs": "N/A",
+      "os": "N/A",
+      "dlt": "N/A",
+      "highlight": "기존 세포독성 ADC와 달리 면역 자극 기전을 이용하는 ISAC로, 낮은 CLDN18.2 발현(IHC 1+)에서도 완전관해를 달성하고 T세포 의존적 면역 기억을 유도하여 기존 ADC 대비 우수한 효능을 보임",
+      "conf": "ESMO 2025",
+      "file_name": "4390.pdf",
+      "analyzed_at": "2026-04-13T06:47:19.520269+00:00",
+      "drive_file_id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A",
+      "id": "1NDOumTESWvmAUA_PSAH5PN9T_9r7gV6A"
+    },
+    {
+      "title": "Phase 1/2 study of BDC-4182, a claudin18.2-targeting next-generation immune-stimulating antibody conjugate (ISAC), in patients with advanced gastric and gastroesophageal cancer",
+      "company": "Bolt Biotherapeutics",
+      "target": "CLDN18.2",
+      "indication": "2L+ metastatic gastric or gastroesophageal cancer",
       "payload": "Immune-stimulating payload",
       "linker": "N/A",
       "dar": "N/A",
@@ -100,6 +120,6 @@
       ]
     }
   ],
-  "updated_at": "2026-04-13T06:39:57.415300+00:00",
-  "total": 4
+  "updated_at": "2026-04-13T06:47:19.520422+00:00",
+  "total": 5
 }
