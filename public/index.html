@@ -437,23 +437,11 @@ body {
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">Modality</div>
-    <div class="chip-group">
-      <span class="chip active" onclick="toggleMod(this,'ADC')">ADC</span>
-      <span class="chip" onclick="toggleMod(this,'biADC')">biADC</span>
-      <span class="chip" onclick="toggleMod(this,'PDC')">PDC</span>
-      <span class="chip" onclick="toggleMod(this,'XDC')">XDC</span>
-    </div>
+    <div class="chip-group" id="modalityChips"></div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">Target</div>
-    <div class="chip-group" id="targetChips">
-      <span class="chip active" onclick="toggleTarget(this,'ALL')">전체</span>
-      <span class="chip" onclick="toggleTarget(this,'HER2')">HER2</span>
-      <span class="chip" onclick="toggleTarget(this,'TROP2')">TROP2</span>
-      <span class="chip" onclick="toggleTarget(this,'HER3')">HER3</span>
-      <span class="chip" onclick="toggleTarget(this,'EGFR×HER3')">EGFR×HER3</span>
-      <span class="chip" onclick="toggleTarget(this,'B7-H4')">B7-H4</span>
-    </div>
+    <div class="chip-group" id="targetChips"></div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">임상 단계</div>
@@ -735,6 +723,8 @@ async function loadData() {
     document.getElementById('lastUpdated').textContent = '(샘플 데이터 — data.json 없음)';
   }
   renderConfList();
+  renderModalityChips();
+  renderTargetChips();
   renderList();
   if (POSTERS.length > 0) { selected = POSTERS[0]; renderSummary(selected); }
   renderPipeline();
@@ -874,6 +864,23 @@ function selectPoster(id) {
 }
 
 // ── FILTERS ──
+function renderModalityChips() {
+  const mods = [...new Set(POSTERS.map(p => p.modality || 'ADC').filter(Boolean))].sort();
+  document.getElementById('modalityChips').innerHTML =
+    mods.map(mod =>
+      `<span class="chip${activeMods.has(mod) ? ' active' : ''}" onclick="toggleMod(this,'${mod}')">${mod}</span>`
+    ).join('');
+}
+
+function renderTargetChips() {
+  const targets = [...new Set(POSTERS.map(p => p.target).filter(Boolean))].sort();
+  document.getElementById('targetChips').innerHTML =
+    `<span class="chip${activeTargets.has('ALL') ? ' active' : ''}" onclick="toggleTarget(this,'ALL')">전체</span>` +
+    targets.map(t =>
+      `<span class="chip${activeTargets.has(t) ? ' active' : ''}" onclick="toggleTarget(this,'${t}')">${t}</span>`
+    ).join('');
+}
+
 function renderConfList() {
   const counts = {};
   POSTERS.forEach(p => { counts[p.conf] = (counts[p.conf] || 0) + 1; });
@@ -904,17 +911,20 @@ function toggleMod(el, mod) {
   if (el.classList.contains('active')) activeMods.add(mod); else activeMods.delete(mod);
   renderList();
 }
+
 function toggleTarget(el, t) {
   if (t === 'ALL') {
     activeTargets.clear(); activeTargets.add('ALL');
-    document.querySelectorAll('#targetChips .chip').forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
+    renderTargetChips();
   } else {
     activeTargets.delete('ALL');
-    document.getElementById('targetChips').children[0].classList.remove('active');
     el.classList.toggle('active');
     if (el.classList.contains('active')) activeTargets.add(t); else activeTargets.delete(t);
-    if (activeTargets.size === 0) { activeTargets.add('ALL'); document.getElementById('targetChips').children[0].classList.add('active'); }
+    if (activeTargets.size === 0) { activeTargets.add('ALL'); }
+    renderTargetChips();
+  }
+  renderList();
+}
   }
   renderList();
 }
