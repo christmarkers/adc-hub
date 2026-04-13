@@ -816,7 +816,7 @@ function renderList() {
   el.innerHTML = list.length === 0
     ? '<div class="empty-state" style="height:120px">조건에 맞는 포스터가 없습니다</div>'
     : list.map(p => `
-      <div class="poster-card${p.id===selected.id?' active':''}" onclick="selectPoster(${p.id})">
+      <div class="poster-card${selected && p.id===selected.id?' active':''}" onclick="selectPoster(${p.id})">
         <div class="pc-title">${p.title}</div>
         <div class="pc-meta">${p.company} · ${p.conf}</div>
         <div class="pc-badges">
